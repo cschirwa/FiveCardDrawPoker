@@ -1,6 +1,7 @@
-/Users/calvin/eclipse-workspace/FiveCardDrawPoker/src/main/java/za/co/poker/service/PokerHandEvalService.java
+/Users/calvin/eclipse-workspace/FiveCardDrawPoker/src/main/java/za/co/poker/service/HandEvaluatorService.java
 /Users/calvin/eclipse-workspace/FiveCardDrawPoker/src/main/java/za/co/poker/utility/Suit.java
 /Users/calvin/eclipse-workspace/FiveCardDrawPoker/src/main/java/za/co/poker/service/DeckService.java
+/Users/calvin/eclipse-workspace/FiveCardDrawPoker/src/main/java/za/co/poker/service/Impl/HandEvaluatorServiceImpl.java
 /Users/calvin/eclipse-workspace/FiveCardDrawPoker/src/main/java/za/co/poker/service/Impl/DeckServiceImpl.java
 /Users/calvin/eclipse-workspace/FiveCardDrawPoker/src/main/java/za/co/poker/utility/Category.java
 /Users/calvin/eclipse-workspace/FiveCardDrawPoker/src/main/java/za/co/poker/Game.java
@@ -8,4 +9,3 @@
 /Users/calvin/eclipse-workspace/FiveCardDrawPoker/src/main/java/za/co/poker/utility/Rank.java
 /Users/calvin/eclipse-workspace/FiveCardDrawPoker/src/main/java/za/co/poker/utility/Util.java
 /Users/calvin/eclipse-workspace/FiveCardDrawPoker/src/main/java/za/co/poker/constants/Constants.java
-/Users/calvin/eclipse-workspace/FiveCardDrawPoker/src/main/java/za/co/poker/service/Impl/PokerHandEvalServiceImpl.java

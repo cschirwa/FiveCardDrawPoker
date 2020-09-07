@@ -3,8 +3,8 @@ package za.co.poker.service;
 import za.co.poker.utility.Card;
 import za.co.poker.utility.Category;
 
-public interface PokerHandEvalService {
+public interface HandEvaluatorService {
 	
-	public Category evaluateHand(Card[] hand);
+	public Category evaluate(Card[] hand);
 	
 }

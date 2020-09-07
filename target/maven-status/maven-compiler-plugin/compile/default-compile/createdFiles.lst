@@ -3,9 +3,7 @@ za/co/poker/utility/Card.class
 za/co/poker/utility/Category.class
 za/co/poker/utility/Util.class
 za/co/poker/service/Impl/DeckServiceImpl.class
-za/co/poker/service/Impl/PokerHandEvalServiceImpl.class
 za/co/poker/utility/Rank.class
-za/co/poker/service/PokerHandEvalService.class
 za/co/poker/utility/Suit.class
 za/co/poker/service/DeckService.class
 za/co/poker/Game.class

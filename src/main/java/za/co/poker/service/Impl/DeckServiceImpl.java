@@ -16,6 +16,7 @@ public class DeckServiceImpl implements DeckService {
 	private Random random = ThreadLocalRandom.current();
 	
 	Card[] hand = new Card[HAND_SIZE];
+	Card[] cardDeck = new Card[DECK_SIZE];
 
 	/* Shuffle the deck upon construction */
 	public DeckServiceImpl() {
@@ -24,21 +25,24 @@ public class DeckServiceImpl implements DeckService {
 	
 	/*=============================================
 	 *  Shuffling Algorithm can be defined here
+	 *  
 	 *  ===========================================
 	 */
 	public void shuffle() {
 		Util.print("Shuffling.... Shuffling... Shuffling...");
+		for(int i=0; i<cardDeck.length;i++) {
+			int index = random.nextInt(DECK_SIZE);
+			if(!isCardAlreadyInHand(Card.values()[index]))
+			cardDeck[i] = Card.values()[index];
+		}
 	}
 
 
 	public Card[] drawHand() {
 		for(int i = 0; i<HAND_SIZE; i++) {
 			Card card = getRandomCard();
-			if(isCardAlreadyInHand(card)) {
-				{
-					card = getRandomCard();
-				} while(isCardAlreadyInHand(card));
-			}
+			if(isCardAlreadyInHand(card)) 
+				card = getRandomCard();
 			hand[i] = card;
 		}
 		for (Card card : hand) {

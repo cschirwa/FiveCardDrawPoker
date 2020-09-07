@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test;
 import za.co.poker.utility.Card;
 import za.co.poker.utility.Category;
 
-class PokerHandEvalServiceImplTest {
+class HandEvaluatorServiceImplTest {
 
-	private final PokerHandEvalServiceImpl pokerService = new PokerHandEvalServiceImpl();
+	private final HandEvaluatorServiceImpl pokerService = new HandEvaluatorServiceImpl();
 
 	@Test
 	void testEvaluateHand() {					
@@ -21,7 +21,7 @@ class PokerHandEvalServiceImplTest {
 		sFlushHand[2] = Card.QUEEN_CLUBS;
 		sFlushHand[3] = Card.JACK_CLUBS;
 		sFlushHand[4] = Card.TEN_CLUBS;
-		assertEquals(Category.STRAIGHT_FLUSH, pokerService.evaluateHand(sFlushHand));
+		assertEquals(Category.STRAIGHT_FLUSH, pokerService.evaluate(sFlushHand));
 	
 		//Four Of A Kind - A♣ A♦ A❤ A♠ 8♣
 		Card[] fourHand = new Card[5];
@@ -30,7 +30,7 @@ class PokerHandEvalServiceImplTest {
 		fourHand[2] = Card.ACE_HEARTS;
 		fourHand[3] = Card.ACE_SPADES;
 		fourHand[4] = Card.EIGHT_CLUBS;
-		assertEquals(Category.FOUR_OF_A_KIND,pokerService.evaluateHand(fourHand));
+		assertEquals(Category.FOUR_OF_A_KIND,pokerService.evaluate(fourHand));
 	
 		//Full House - A♣ A♦ A❤ 7♠ 7♣
 		Card[] fullHand = new Card[5];
@@ -39,7 +39,7 @@ class PokerHandEvalServiceImplTest {
 		fullHand[2] = Card.ACE_HEARTS;
 		fullHand[3] = Card.SEVEN_SPADES;
 		fullHand[4] = Card.SEVEN_CLUBS;
-		assertEquals(Category.FULL_HOUSE, pokerService.evaluateHand(fullHand));
+		assertEquals(Category.FULL_HOUSE, pokerService.evaluate(fullHand));
 
 		//Three Of A Kind - 2♣ 2♦ 2❤ A♠ 8♣
 		Card[] ThreesHand = {
@@ -48,7 +48,7 @@ class PokerHandEvalServiceImplTest {
 				Card.TWO_HEARTS, 
 				Card.ACE_SPADES, 
 				Card.EIGHT_CLUBS};
-		assertEquals(Category.THREE_OF_A_KIND, pokerService.evaluateHand(ThreesHand));
+		assertEquals(Category.THREE_OF_A_KIND, pokerService.evaluate(ThreesHand));
 
 		//5♣ 3♦ 5❤ 3♠ 8❤
 		Card[] TwoPairHand = {Card.THREE_DIAMONDS, 
@@ -56,7 +56,7 @@ class PokerHandEvalServiceImplTest {
 				Card.FIVE_HEARTS, 
 				Card.THREE_SPADES, 
 				Card.EIGHT_HEARTS};
-		assertEquals(Category.TWO_PAIR, pokerService.evaluateHand(TwoPairHand));
+		assertEquals(Category.TWO_PAIR, pokerService.evaluate(TwoPairHand));
 
 		//One Pair - A♦ 8♣ 5♣ 3♠ A❤ 
 		Card[] isPairhand = {Card.ACE_DIAMONDS, 
@@ -64,7 +64,7 @@ class PokerHandEvalServiceImplTest {
 				Card.FIVE_CLUBS, 
 				Card.THREE_SPADES, 
 				Card.EIGHT_HEARTS};
-		assertEquals(Category.ONE_PAIR ,pokerService.evaluateHand(isPairhand));
+		assertEquals(Category.ONE_PAIR ,pokerService.evaluate(isPairhand));
 
 		//Flush Hand - A♣ 8♣ 5♣ 3♣ J♣
 		Card[] flushHand = {Card.ACE_CLUBS, 
@@ -72,7 +72,7 @@ class PokerHandEvalServiceImplTest {
 				Card.FIVE_CLUBS, 
 				Card.THREE_CLUBS, 
 				Card.JACK_CLUBS};
-		assertEquals(Category.FLUSH, pokerService.evaluateHand(flushHand));
+		assertEquals(Category.FLUSH, pokerService.evaluate(flushHand));
 
 		//Straight Hand - 4♠ 8♣ 5♠ 6♠ 7♠
 		Card[] straightHand = {
@@ -81,6 +81,6 @@ class PokerHandEvalServiceImplTest {
 				Card.FIVE_SPADES, 
 				Card.SIX_SPADES, 
 				Card.SEVEN_SPADES};
-		assertEquals(Category.STRAIGHT, pokerService.evaluateHand(straightHand));
+		assertEquals(Category.STRAIGHT, pokerService.evaluate(straightHand));
 	}
 }

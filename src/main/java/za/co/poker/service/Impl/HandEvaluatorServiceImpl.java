@@ -5,29 +5,29 @@ import za.co.poker.utility.Category;
 
 import static za.co.poker.constants.Constants.*;
 
-import za.co.poker.service.PokerHandEvalService;
+import za.co.poker.service.HandEvaluatorService;
 
-public class PokerHandEvalServiceImpl implements PokerHandEvalService {
+public class HandEvaluatorServiceImpl implements HandEvaluatorService {
 
 	/***********************************************************
 	 * Methods used to determine a certain Poker hand
 	 ***********************************************************/
-	public Category evaluateHand(Card[] h) {
-		if (isFlush(h) && isStraight(h))
+	public Category evaluate(Card[] hand) {
+		if (isFlush(hand) && isStraight(hand))
 			return Category.STRAIGHT_FLUSH;
-		else if (isFourOfAKind(h))
+		else if (isFourOfAKind(hand))
 			return Category.FOUR_OF_A_KIND;
-		else if (isFullHouse(h))
+		else if (isFullHouse(hand))
 			return Category.FULL_HOUSE;
-		else if (isFlush(h))
+		else if (isFlush(hand))
 			return Category.FLUSH;
-		else if (isStraight(h))
+		else if (isStraight(hand))
 			return Category.STRAIGHT;
-		else if (isThreeOfAKind(h))
+		else if (isThreeOfAKind(hand))
 			return Category.THREE_OF_A_KIND;
-		else if (isTwoPairs(h))
+		else if (isTwoPairs(hand))
 			return Category.TWO_PAIR;
-		else if (isAPair(h))
+		else if (isAPair(hand))
 			return Category.ONE_PAIR;
 		else
 			return Category.HIGH_CARD;
@@ -37,21 +37,21 @@ public class PokerHandEvalServiceImpl implements PokerHandEvalService {
 	/***********************************************************
 	 * Method used to determine if hand has 4 of a kind
 	 ***********************************************************/
-	private boolean isFourOfAKind(Card[] h) {
+	private boolean isFourOfAKind(Card[] hand) {
 		boolean a1, a2;
 
-		if (h.length != HAND_SIZE)
+		if (hand.length != HAND_SIZE)
 			return (false);
 
-		sortByRank(h);
+		sortByRank(hand);
 
-		a1 = h[0].getRank().ordinal() == h[1].getRank().ordinal()
-				&& h[1].getRank().ordinal() == h[2].getRank().ordinal()
-				&& h[2].getRank().ordinal() == h[3].getRank().ordinal();
+		a1 = hand[0].getRank().ordinal() == hand[1].getRank().ordinal()
+				&& hand[1].getRank().ordinal() == hand[2].getRank().ordinal()
+				&& hand[2].getRank().ordinal() == hand[3].getRank().ordinal();
 
-		a2 = h[1].getRank().ordinal() == h[2].getRank().ordinal()
-				&& h[2].getRank().ordinal() == h[3].getRank().ordinal()
-				&& h[3].getRank().ordinal() == h[4].getRank().ordinal();
+		a2 = hand[1].getRank().ordinal() == hand[2].getRank().ordinal()
+				&& hand[2].getRank().ordinal() == hand[3].getRank().ordinal()
+				&& hand[3].getRank().ordinal() == hand[4].getRank().ordinal();
 
 		return (a1 || a2);
 	}
@@ -61,21 +61,21 @@ public class PokerHandEvalServiceImpl implements PokerHandEvalService {
 	 * isFullHouse(): true if h has Full House false otherwise false
 	 * ----------------------------------------------------------------
 	 */
-	private boolean isFullHouse(Card[] h) {
+	private boolean isFullHouse(Card[] hand) {
 		boolean a1, a2;
 
-		if (h.length != HAND_SIZE)
+		if (hand.length != HAND_SIZE)
 			return (false);
 
-		sortByRank(h);
+		sortByRank(hand);
 
-		a1 = h[0].getRank().ordinal() == h[1].getRank().ordinal() && // x x x y y
-				h[1].getRank().ordinal() == h[2].getRank().ordinal()
-				&& h[3].getRank().ordinal() == h[4].getRank().ordinal();
+		a1 = hand[0].getRank().ordinal() == hand[1].getRank().ordinal() && // x x x y y
+				hand[1].getRank().ordinal() == hand[2].getRank().ordinal()
+				&& hand[3].getRank().ordinal() == hand[4].getRank().ordinal();
 
-		a2 = h[0].getRank().ordinal() == h[1].getRank().ordinal() && // x x y y y
-				h[2].getRank().ordinal() == h[3].getRank().ordinal()
-				&& h[3].getRank().ordinal() == h[4].getRank().ordinal();
+		a2 = hand[0].getRank().ordinal() == hand[1].getRank().ordinal() && // x x y y y
+				hand[2].getRank().ordinal() == hand[3].getRank().ordinal()
+				&& hand[3].getRank().ordinal() == hand[4].getRank().ordinal();
 
 		return (a1 || a2);
 	}
@@ -86,13 +86,13 @@ public class PokerHandEvalServiceImpl implements PokerHandEvalService {
 	 **** 
 	 * Note: use isThreeOfAKind() ONLY if you know the hand does not have 4 of a kind
 	 * -----------------------------------------------------------------------------*/
-	private boolean isThreeOfAKind(Card[] h) {
+	private boolean isThreeOfAKind(Card[] hand) {
 		boolean a1, a2, a3;
 
-		if (h.length != HAND_SIZE)
+		if (hand.length != HAND_SIZE)
 			return (false);
 
-		if (isFourOfAKind(h) || isFullHouse(h))
+		if (isFourOfAKind(hand) || isFullHouse(hand))
 			return (false); // The hand is not 3 of a kind (but better)
 
 		/*
@@ -101,16 +101,16 @@ public class PokerHandEvalServiceImpl implements PokerHandEvalService {
 		 * hand is not 4 of a kind or a full house
 		 * ----------------------------------------------------------
 		 */
-		sortByRank(h);
+		sortByRank(hand);
 
-		a1 = h[0].getRank().ordinal() == h[1].getRank().ordinal()
-				&& h[1].getRank().ordinal() == h[2].getRank().ordinal();
+		a1 = hand[0].getRank().ordinal() == hand[1].getRank().ordinal()
+				&& hand[1].getRank().ordinal() == hand[2].getRank().ordinal();
 
-		a2 = h[1].getRank().ordinal() == h[2].getRank().ordinal()
-				&& h[2].getRank().ordinal() == h[3].getRank().ordinal();
+		a2 = hand[1].getRank().ordinal() == hand[2].getRank().ordinal()
+				&& hand[2].getRank().ordinal() == hand[3].getRank().ordinal();
 
-		a3 = h[2].getRank().ordinal() == h[3].getRank().ordinal()
-				&& h[3].getRank().ordinal() == h[4].getRank().ordinal();
+		a3 = hand[2].getRank().ordinal() == hand[3].getRank().ordinal()
+				&& hand[3].getRank().ordinal() == hand[4].getRank().ordinal();
 
 		return (a1 || a2 || a3);
 	}
@@ -123,25 +123,25 @@ public class PokerHandEvalServiceImpl implements PokerHandEvalService {
 	 * better 
 	 * -----------------------------------------------------------------------------
 	 */
-	private boolean isTwoPairs(Card[] h) {
+	private boolean isTwoPairs(Card[] hand) {
 		boolean a1, a2, a3;
 
-		if (h.length != HAND_SIZE)
+		if (hand.length != HAND_SIZE)
 			return (false);
 
-		if (isFourOfAKind(h) || isFullHouse(h) || isThreeOfAKind(h))
+		if (isFourOfAKind(hand) || isFullHouse(hand) || isThreeOfAKind(hand))
 			return (false); // The hand is not 2 pairs (but better)
 
-		sortByRank(h);
+		sortByRank(hand);
 
-		a1 = h[0].getRank().ordinal() == h[1].getRank().ordinal()
-				&& h[2].getRank().ordinal() == h[3].getRank().ordinal();
+		a1 = hand[0].getRank().ordinal() == hand[1].getRank().ordinal()
+				&& hand[2].getRank().ordinal() == hand[3].getRank().ordinal();
 
-		a2 = h[0].getRank().ordinal() == h[1].getRank().ordinal()
-				&& h[3].getRank().ordinal() == h[4].getRank().ordinal();
+		a2 = hand[0].getRank().ordinal() == hand[1].getRank().ordinal()
+				&& hand[3].getRank().ordinal() == hand[4].getRank().ordinal();
 
-		a3 = h[1].getRank().ordinal() == h[2].getRank().ordinal()
-				&& h[3].getRank().ordinal() == h[4].getRank().ordinal();
+		a3 = hand[1].getRank().ordinal() == hand[2].getRank().ordinal()
+				&& hand[3].getRank().ordinal() == hand[4].getRank().ordinal();
 
 		return (a1 || a2 || a3);
 	}
@@ -153,21 +153,21 @@ public class PokerHandEvalServiceImpl implements PokerHandEvalService {
 	 * Note: use isTwoPairs() ONLY if you know the hand does not have 2 pairs or better
 	 * ----------------------------------------------------------------------------------
 	 */
-	private boolean isAPair(Card[] h) {
+	private boolean isAPair(Card[] hand) {
 		boolean a1, a2, a3, a4;
 
-		if (h.length != HAND_SIZE)
+		if (hand.length != HAND_SIZE)
 			return (false);
 
-		if (isFourOfAKind(h) || isFullHouse(h) || isThreeOfAKind(h) || isTwoPairs(h))
+		if (isFourOfAKind(hand) || isFullHouse(hand) || isThreeOfAKind(hand) || isTwoPairs(hand))
 			return (false); // The hand is not one pair (but better)
 
-		sortByRank(h);
+		sortByRank(hand);
 
-		a1 = h[0].getRank().ordinal() == h[1].getRank().ordinal();
-		a2 = h[1].getRank().ordinal() == h[2].getRank().ordinal();
-		a3 = h[2].getRank().ordinal() == h[3].getRank().ordinal();
-		a4 = h[3].getRank().ordinal() == h[4].getRank().ordinal();
+		a1 = hand[0].getRank().ordinal() == hand[1].getRank().ordinal();
+		a2 = hand[1].getRank().ordinal() == hand[2].getRank().ordinal();
+		a3 = hand[2].getRank().ordinal() == hand[3].getRank().ordinal();
+		a4 = hand[3].getRank().ordinal() == hand[4].getRank().ordinal();
 
 		return (a1 || a2 || a3 || a4);
 	}
@@ -177,13 +177,13 @@ public class PokerHandEvalServiceImpl implements PokerHandEvalService {
 	 * isFlush(): true if h has a flush false otherwise 
 	 * --------------------------------------------------------------
 	 */
-	private boolean isFlush(Card[] h) {
-		if (h.length != HAND_SIZE)
+	private boolean isFlush(Card[] hand) {
+		if (hand.length != HAND_SIZE)
 			return (false);
 
-		sortBySuit(h);
+		sortBySuit(hand);
 
-		return (h[0].getSuit() == h[4].getSuit()); // All cards has same suit
+		return (hand[0].getSuit() == hand[4].getSuit()); // All cards has same suit
 	}
 
 	/*
@@ -191,29 +191,29 @@ public class PokerHandEvalServiceImpl implements PokerHandEvalService {
 	 * isStraight(): true if h is a Straight false otherwise 
 	 * ---------------------------------------------------------------
 	 */
-	private boolean isStraight(Card[] h) {
+	private boolean isStraight(Card[] hand) {
 		int i, testRank;
 
-		if (h.length != HAND_SIZE)
+		if (hand.length != HAND_SIZE)
 			return (false);
 
-		sortByRank(h);
+		sortByRank(hand);
 
 		/*
 		 * =========================== 
 		 * Check if hand has an Ace
 		 * ===========================
 		 */
-		if (h[4].getRank().ordinal() == 12) {
+		if (hand[4].getRank().ordinal() == 12) {
 			/*
 			 * ================================= 
 			 * Check straight using an Ace
 			 * =================================
 			 */
-			boolean a = h[0].getRank().ordinal() == 0 && h[1].getRank().ordinal() == 1 && h[2].getRank().ordinal() == 2
-					&& h[3].getRank().ordinal() == 3;
-			boolean b = h[0].getRank().ordinal() == 8 && h[1].getRank().ordinal() == 9
-					&& h[2].getRank().ordinal() == 10 && h[3].getRank().ordinal() == 11;
+			boolean a = hand[0].getRank().ordinal() == 0 && hand[1].getRank().ordinal() == 1 && hand[2].getRank().ordinal() == 2
+					&& hand[3].getRank().ordinal() == 3;
+			boolean b = hand[0].getRank().ordinal() == 8 && hand[1].getRank().ordinal() == 9
+					&& hand[2].getRank().ordinal() == 10 && hand[3].getRank().ordinal() == 11;
 
 			return (a || b);
 		} else {
@@ -221,10 +221,10 @@ public class PokerHandEvalServiceImpl implements PokerHandEvalService {
 			 * General case: check for increasing values 
 			 * ===========================================
 			 */
-			testRank = h[0].getRank().ordinal() + 1;
+			testRank = hand[0].getRank().ordinal() + 1;
 
 			for (i = 1; i < HAND_SIZE; i++) {
-				if (h[i].getRank().ordinal() != testRank)
+				if (hand[i].getRank().ordinal() != testRank)
 					return (false); // Straight failed...
 
 				testRank++;
@@ -248,7 +248,7 @@ public class PokerHandEvalServiceImpl implements PokerHandEvalService {
 	 * (Finding a straight is easier that way)
 	 * ---------------------------------------------
 	 */
-	private void sortByRank(Card[] h) {
+	private void sortByRank(Card[] hand) {
 		int i, j, min_j;
 
 		/*
@@ -257,17 +257,17 @@ public class PokerHandEvalServiceImpl implements PokerHandEvalService {
 		 * algorithm 
 		 * ---------------------------------------------------
 		 */
-		for (i = 0; i < h.length; i++) {
+		for (i = 0; i < hand.length; i++) {
 			/*
 			 * --------------------------------------------------- 
 			 * Find array element with
-			 * min. value among h[i], h[i+1], ..., h[n-1]
+			 * min. value among hand[i], hand[i+1], ..., hand[n-1]
 			 * ---------------------------------------------------
 			 */
-			min_j = i; // Assume elem i (h[i]) is the minimum
+			min_j = i; // Assume elem i (hand[i]) is the minimum
 
-			for (j = i + 1; j < h.length; j++) {
-				if (h[j].getRank().ordinal() < h[min_j].getRank().ordinal()) {
+			for (j = i + 1; j < hand.length; j++) {
+				if (hand[j].getRank().ordinal() < hand[min_j].getRank().ordinal()) {
 					min_j = j; // We found a smaller minimum, update min_j
 				}
 			}
@@ -277,9 +277,9 @@ public class PokerHandEvalServiceImpl implements PokerHandEvalService {
 			 * Swap a[i] and a[min_j]
 			 * ---------------------------------------------------
 			 */
-			Card help = h[i];
-			h[i] = h[min_j];
-			h[min_j] = help;
+			Card help = hand[i];
+			hand[i] = hand[min_j];
+			hand[min_j] = help;
 		}
 	}
 
@@ -292,7 +292,7 @@ public class PokerHandEvalServiceImpl implements PokerHandEvalService {
 	 * (Finding a flush is eaiser that way)
 	 * ---------------------------------------------
 	 */
-	private void sortBySuit(Card[] h) {
+	private void sortBySuit(Card[] hand) {
 		int i, j, min_j;
 
 		/*
@@ -301,17 +301,17 @@ public class PokerHandEvalServiceImpl implements PokerHandEvalService {
 		 * algorithm 
 		 * ---------------------------------------------------
 		 */
-		for (i = 0; i < h.length; i++) {
+		for (i = 0; i < hand.length; i++) {
 			/*
 			 * --------------------------------------------------- 
 			 * Find array element with
-			 * min. value among h[i], h[i+1], ..., h[n-1]
+			 * min. value among hand[i], hand[i+1], ..., hand[n-1]
 			 * ---------------------------------------------------
 			 */
-			min_j = i; // Assume elem i (h[i]) is the minimum
+			min_j = i; // Assume elem i (hand[i]) is the minimum
 
-			for (j = i + 1; j < h.length; j++) {
-				if (h[j].getSuit().ordinal() < h[min_j].getSuit().ordinal()) {
+			for (j = i + 1; j < hand.length; j++) {
+				if (hand[j].getSuit().ordinal() < hand[min_j].getSuit().ordinal()) {
 					min_j = j; // We found a smaller minimum, update min_j
 				}
 			}
@@ -321,9 +321,9 @@ public class PokerHandEvalServiceImpl implements PokerHandEvalService {
 			 * Swap a[i] and a[min_j]
 			 * ---------------------------------------------------
 			 */
-			Card help = h[i];
-			h[i] = h[min_j];
-			h[min_j] = help;
+			Card help = hand[i];
+			hand[i] = hand[min_j];
+			hand[min_j] = help;
 		}
 	}
 
