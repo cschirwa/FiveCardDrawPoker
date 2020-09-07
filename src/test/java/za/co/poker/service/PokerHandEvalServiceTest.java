@@ -13,8 +13,7 @@ class PokerHandEvalServiceTest {
 	private final PokerHandEvalService pokerService = new PokerHandEvalService();
 	
 	@Test
-	void testEvaluateHand() {
-		//A♣ A♦ A❤ A♠ 8♣
+	void testEvaluateHand() {						//A♣ A♦ A❤ A♠ 8♣
 		Card[] hand = new Card[5];
 		hand[0] = Card.ACE_CLUBS;
 		hand[1] = Card.ACE_DIAMONDS;

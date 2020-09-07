@@ -34,7 +34,9 @@ public class Deck implements IDeck {
 		for(int i = 0; i<HAND_SIZE; i++) {
 			Card card = getRandomCard();
 			if(isCardAlreadyInHand(card)) {
-				card = getRandomCard();
+				{
+					card = getRandomCard();
+				} while(isCardAlreadyInHand(card));
 			}
 			hand[i] = card;
 		}
