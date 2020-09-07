@@ -5,6 +5,7 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>FiveCardDrawPoker</name>
   <description>Five Card Draw Poker Game</description>
+  <packaging>jar</packaging>
   <properties>
 		<java.version>1.8</java.version>
         <maven.compiler.source>1.8</maven.compiler.source>
