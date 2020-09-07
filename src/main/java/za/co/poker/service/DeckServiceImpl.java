@@ -1,4 +1,4 @@
-package za.co.poker;
+package za.co.poker.service;
 
 import static za.co.poker.constants.Constants.*;
 
@@ -10,14 +10,14 @@ import za.co.poker.utility.Rank;
 import za.co.poker.utility.Suit;
 import za.co.poker.utility.Util;
 
-public class Deck implements IDeck {
+public class DeckServiceImpl implements DeckService {
 
 	private Random random = ThreadLocalRandom.current();
 	
 	Card[] hand = new Card[HAND_SIZE];
 
 	/* Shuffle the deck upon construction */
-	public Deck() {
+	public DeckServiceImpl() {
 		shuffle();
 	}
 	

@@ -1,8 +1,8 @@
-package za.co.poker;
+package za.co.poker.service;
 
 import za.co.poker.utility.Card;
 
-public interface IDeck {
+public interface DeckService {
 
 	void shuffle();
 	Card[] drawHand();

@@ -1,6 +1,6 @@
 package za.co.poker.utility;
 
-public enum Rank implements Rankable {
+public enum Rank {
 	
 	TWO("2"),
 	THREE("3"),

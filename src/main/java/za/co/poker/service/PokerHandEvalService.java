@@ -35,7 +35,7 @@ public class PokerHandEvalService implements PokerHandEval {
 	/***********************************************************
 	 * Method used to determine if hand has 4 of a kind
 	 ***********************************************************/
-	public boolean isFourOfAKind(Card[] h) {
+	private boolean isFourOfAKind(Card[] h) {
 		boolean a1, a2;
 
 		if (h.length != HAND_SIZE)
@@ -59,7 +59,7 @@ public class PokerHandEvalService implements PokerHandEval {
 	 * isFullHouse(): true if h has Full House false otherwise false
 	 * ----------------------------------------------------------------
 	 */
-	public boolean isFullHouse(Card[] h) {
+	private boolean isFullHouse(Card[] h) {
 		boolean a1, a2;
 
 		if (h.length != HAND_SIZE)
@@ -84,7 +84,7 @@ public class PokerHandEvalService implements PokerHandEval {
 	 **** 
 	 * Note: use isThreeOfAKind() ONLY if you know the hand does not have 4 of a kind
 	 * -----------------------------------------------------------------------------*/
-	public boolean isThreeOfAKind(Card[] h) {
+	private boolean isThreeOfAKind(Card[] h) {
 		boolean a1, a2, a3;
 
 		if (h.length != HAND_SIZE)
@@ -121,7 +121,7 @@ public class PokerHandEvalService implements PokerHandEval {
 	 * better 
 	 * -----------------------------------------------------------------------------
 	 */
-	public boolean isTwoPairs(Card[] h) {
+	private boolean isTwoPairs(Card[] h) {
 		boolean a1, a2, a3;
 
 		if (h.length != HAND_SIZE)
@@ -151,7 +151,7 @@ public class PokerHandEvalService implements PokerHandEval {
 	 * Note: use isTwoPairs() ONLY if you know the hand does not have 2 pairs or better
 	 * ----------------------------------------------------------------------------------
 	 */
-	public boolean isAPair(Card[] h) {
+	private boolean isAPair(Card[] h) {
 		boolean a1, a2, a3, a4;
 
 		if (h.length != HAND_SIZE)
@@ -175,7 +175,7 @@ public class PokerHandEvalService implements PokerHandEval {
 	 * isFlush(): true if h has a flush false otherwise 
 	 * --------------------------------------------------------------
 	 */
-	public boolean isFlush(Card[] h) {
+	private boolean isFlush(Card[] h) {
 		if (h.length != HAND_SIZE)
 			return (false);
 
@@ -189,7 +189,7 @@ public class PokerHandEvalService implements PokerHandEval {
 	 * isStraight(): true if h is a Straight false otherwise 
 	 * ---------------------------------------------------------------
 	 */
-	public boolean isStraight(Card[] h) {
+	private boolean isStraight(Card[] h) {
 		int i, testRank;
 
 		if (h.length != HAND_SIZE)

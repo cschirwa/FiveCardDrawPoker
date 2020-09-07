@@ -1,6 +1,5 @@
 package za.co.poker.service;
 
-
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
@@ -11,90 +10,77 @@ import za.co.poker.utility.Category;
 class PokerHandEvalServiceTest {
 
 	private final PokerHandEvalService pokerService = new PokerHandEvalService();
+
+	@Test
+	void testEvaluateHand() {					
+		
+		//StraightFlush - A♣ K♦ Q❤ J♠ 10♣
+		Card[] sFlushHand = new Card[5];			
+		sFlushHand[0] = Card.ACE_CLUBS;
+		sFlushHand[1] = Card.KING_CLUBS;
+		sFlushHand[2] = Card.QUEEN_CLUBS;
+		sFlushHand[3] = Card.JACK_CLUBS;
+		sFlushHand[4] = Card.TEN_CLUBS;
+		assertEquals(Category.STRAIGHT_FLUSH, pokerService.evaluateHand(sFlushHand));
 	
-	@Test
-	void testEvaluateHand() {						//A♣ A♦ A❤ A♠ 8♣
-		Card[] hand = new Card[5];
-		hand[0] = Card.ACE_CLUBS;
-		hand[1] = Card.ACE_DIAMONDS;
-		hand[2] = Card.ACE_HEARTS;
-		hand[3] = Card.ACE_SPADES;
-		hand[4] = Card.EIGHT_CLUBS;
-		assertEquals(Category.FOUR_OF_A_KIND, pokerService.evaluateHand(hand));
-	}
+		//Four Of A Kind - A♣ A♦ A❤ A♠ 8♣
+		Card[] fourHand = new Card[5];
+		fourHand[0] = Card.ACE_CLUBS;
+		fourHand[1] = Card.ACE_DIAMONDS;
+		fourHand[2] = Card.ACE_HEARTS;
+		fourHand[3] = Card.ACE_SPADES;
+		fourHand[4] = Card.EIGHT_CLUBS;
+		assertEquals(Category.FOUR_OF_A_KIND,pokerService.evaluateHand(fourHand));
+	
+		//Full House - A♣ A♦ A❤ 7♠ 7♣
+		Card[] fullHand = new Card[5];
+		fullHand[0] = Card.ACE_CLUBS;
+		fullHand[1] = Card.ACE_DIAMONDS;
+		fullHand[2] = Card.ACE_HEARTS;
+		fullHand[3] = Card.SEVEN_SPADES;
+		fullHand[4] = Card.SEVEN_CLUBS;
+		assertEquals(Category.FULL_HOUSE, pokerService.evaluateHand(fullHand));
 
-	@Test
-	void testIsFourOfAKind() {							//A♣ A♦ A❤ A♠ 8♣
-		Card[] hand = new Card[5];
-		hand[0] = Card.ACE_CLUBS;
-		hand[1] = Card.ACE_DIAMONDS;
-		hand[2] = Card.ACE_HEARTS;
-		hand[3] = Card.ACE_SPADES;
-		hand[4] = Card.EIGHT_CLUBS;
-		assertTrue(pokerService.isFourOfAKind(hand));
-	}
-
-	@Test
-	void testIsFullHouse() {							//A♣ A♦ A❤ 7♠ 7♣
-		Card[] hand = new Card[5];
-		hand[0] = Card.ACE_CLUBS;
-		hand[1] = Card.ACE_DIAMONDS;
-		hand[2] = Card.ACE_HEARTS;
-		hand[3] = Card.SEVEN_SPADES;
-		hand[4] = Card.SEVEN_CLUBS;
-		assertTrue(pokerService.isFullHouse(hand));
-	}
-
-	@Test
-	void testIsThreeOfAKind() {							//2♣ 2♦ 2❤ A♠ 8♣
-		Card[] hand = {
+		//Three Of A Kind - 2♣ 2♦ 2❤ A♠ 8♣
+		Card[] ThreesHand = {
 				Card.TWO_CLUBS, 
 				Card.TWO_DIAMONDS, 
 				Card.TWO_HEARTS, 
 				Card.ACE_SPADES, 
 				Card.EIGHT_CLUBS};
-		assertTrue(pokerService.isThreeOfAKind(hand));
-	}
+		assertEquals(Category.THREE_OF_A_KIND, pokerService.evaluateHand(ThreesHand));
 
-	@Test
-	void testIsTwoPairs() {								//5♣ 3♦ 5❤ 3♠ 8❤
-		Card[] hand = {Card.THREE_DIAMONDS, 
+		//5♣ 3♦ 5❤ 3♠ 8❤
+		Card[] TwoPairHand = {Card.THREE_DIAMONDS, 
 				Card.FIVE_CLUBS, 
 				Card.FIVE_HEARTS, 
 				Card.THREE_SPADES, 
 				Card.EIGHT_HEARTS};
-		assertTrue(pokerService.isTwoPairs(hand));
-	}
+		assertEquals(Category.TWO_PAIR, pokerService.evaluateHand(TwoPairHand));
 
-	@Test
-	void testIsAPair() {								//A♦ 8♣ 5♣ 3♠ A❤ 
-		Card[] hand = {Card.ACE_DIAMONDS, 
+		//One Pair - A♦ 8♣ 5♣ 3♠ A❤ 
+		Card[] isPairhand = {Card.ACE_DIAMONDS, 
 				Card.EIGHT_CLUBS, 
 				Card.FIVE_CLUBS, 
 				Card.THREE_SPADES, 
 				Card.EIGHT_HEARTS};
-		assertTrue(pokerService.isAPair(hand));
-	}
+		assertEquals(Category.ONE_PAIR ,pokerService.evaluateHand(isPairhand));
 
-	@Test
-	void testIsFlush() {								//A♣ 8♣ 5♣ 3♣ J♣
-		Card[] hand = {Card.ACE_CLUBS, 
+		//Flush Hand - A♣ 8♣ 5♣ 3♣ J♣
+		Card[] flushHand = {Card.ACE_CLUBS, 
 				Card.EIGHT_CLUBS, 
 				Card.FIVE_CLUBS, 
 				Card.THREE_CLUBS, 
 				Card.JACK_CLUBS};
-		assertTrue(pokerService.isFlush(hand));
-	}
+		assertEquals(Category.FLUSH, pokerService.evaluateHand(flushHand));
 
-	@Test
-	void testIsStraight() {								//4♠ 8♠ 5♠ 6♠ 7♠
-		Card[] hand = {
-				Card.FOUR_SPADES, 
-				Card.EIGHT_SPADES, 
+		//Straight Hand - 4♠ 8♣ 5♠ 6♠ 7♠
+		Card[] straightHand = {
+				Card.FOUR_HEARTS, 
+				Card.EIGHT_CLUBS, 
 				Card.FIVE_SPADES, 
 				Card.SIX_SPADES, 
 				Card.SEVEN_SPADES};
-		assertTrue(pokerService.isStraight(hand));
+		assertEquals(Category.STRAIGHT, pokerService.evaluateHand(straightHand));
 	}
-
 }
