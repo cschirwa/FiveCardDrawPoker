@@ -1,19 +1,16 @@
 package za.co.poker;
 
-import java.util.concurrent.TimeUnit;
-
+import za.co.poker.service.Impl.DeckServiceImpl;
+import za.co.poker.service.Impl.PokerHandEvalServiceImpl;
 import za.co.poker.utility.Card;
-import za.co.poker.service.DeckServiceImpl;
-import za.co.poker.service.PokerHandEvalService;
 
 public class Game {
 
-	private static PokerHandEvalService pokerHandService = new PokerHandEvalService();
+	private static PokerHandEvalServiceImpl pokerHandService = new PokerHandEvalServiceImpl();
 	
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args){
 		
 		DeckServiceImpl deckService = new DeckServiceImpl();
-//		TimeUnit.MILLISECONDS.sleep(1500);
 		System.out.print("Your Hand : ");
 		
 		Card[] hand = deckService.drawHand();

@@ -1,10 +1,11 @@
-package za.co.poker.service;
+package za.co.poker.service.Impl;
 
 import static za.co.poker.constants.Constants.*;
 
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
+import za.co.poker.service.DeckService;
 import za.co.poker.utility.Card;
 import za.co.poker.utility.Rank;
 import za.co.poker.utility.Suit;

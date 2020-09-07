@@ -1,4 +1,4 @@
-package za.co.poker.service;
+package za.co.poker.service.Impl;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test;
 import za.co.poker.utility.Card;
 import za.co.poker.utility.Category;
 
-class PokerHandEvalServiceTest {
+class PokerHandEvalServiceImplTest {
 
-	private final PokerHandEvalService pokerService = new PokerHandEvalService();
+	private final PokerHandEvalServiceImpl pokerService = new PokerHandEvalServiceImpl();
 
 	@Test
 	void testEvaluateHand() {					
