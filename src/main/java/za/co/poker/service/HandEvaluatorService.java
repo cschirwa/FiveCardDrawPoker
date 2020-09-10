@@ -1,10 +1,12 @@
 package za.co.poker.service;
 
-import za.co.poker.utility.Card;
+import java.util.List;
+
+import za.co.poker.entity.Card;
 import za.co.poker.utility.Category;
 
 public interface HandEvaluatorService {
 	
-	public Category evaluate(Card[] hand);
+	public Category evaluate(List<Card> hand);
 	
 }

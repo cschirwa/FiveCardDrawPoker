@@ -2,11 +2,13 @@ package za.co.poker.service.Impl;
 
 import static za.co.poker.constants.Constants.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
+import za.co.poker.entity.Card;
 import za.co.poker.service.DeckService;
-import za.co.poker.utility.Card;
 import za.co.poker.utility.Rank;
 import za.co.poker.utility.Suit;
 import za.co.poker.utility.Util;
@@ -14,84 +16,56 @@ import za.co.poker.utility.Util;
 public class DeckServiceImpl implements DeckService {
 
 	private Random random = ThreadLocalRandom.current();
-	
-	Card[] hand = new Card[HAND_SIZE];
-	Card[] cardDeck = new Card[DECK_SIZE];
+ 
+	private List<Card> deck;
 
-	/* Shuffle the deck upon construction */
+	/* Generate deck and
+	 * Shuffle the deck upon construction 
+	 * ==============================================*/
 	public DeckServiceImpl() {
+		deck = generateDeck();
 		shuffle();
 	}
-	
-	/*=============================================
-	 *  Shuffling Algorithm can be defined here
-	 *  
-	 *  ===========================================
+
+	private static List<Card> generateDeck() {
+		List<Card> deck = new ArrayList<>();
+		for (Suit suit : Suit.values()) {
+			for (Rank rank : Rank.values()) {
+				deck.add(new Card(rank, suit));
+			}
+		}
+		return deck;
+	}
+
+	/*
+	 * ============================================= 
+	 * Shuffling Algorithm can be
+	 * defined here
+	 * 
+	 * ===========================================
 	 */
 	public void shuffle() {
 		Util.print("Shuffling.... Shuffling... Shuffling...");
-		for(int i=0; i<cardDeck.length;i++) {
-			int index = random.nextInt(DECK_SIZE);
-			if(!isCardAlreadyInHand(Card.values()[index]))
-			cardDeck[i] = Card.values()[index];
+		for (int i = 0; i < deck.size(); i++) {
+			int index = random.nextInt(deck.size());
+			Card tempCard = deck.get(i);
+			deck.set(i, deck.get(index));
+			deck.set(index, tempCard);
 		}
+
 	}
 
-
-	public Card[] drawHand() {
-		for(int i = 0; i<HAND_SIZE; i++) {
-			Card card = getRandomCard();
-			if(isCardAlreadyInHand(card)) 
-				card = getRandomCard();
-			hand[i] = card;
+	public List<Card> drawHand() {
+		List<Card> hand = new ArrayList<>();
+		for (int i = 0; i < HAND_SIZE; i++) {
+			hand.add(deck.get(i));
+			deck.remove(i);
 		}
-		for (Card card : hand) {
+		for(Card card: hand) {
 			System.out.print(card + " ");
 		}
 		return hand;
 	}
 
-	private Card getRandomCard() {
-		Rank rank = getRandomRank();
-		Suit suit = getRandomSuit();
-		return Card.valueOf(rank + "_" + suit);
-	}
-
-	/*Get random rank using rank ordinal*/
-	private Rank getRandomRank() {
-		int randomInt = random.nextInt(13);	//Based on 13 available ranks
-		return Rank.values()[randomInt];
-	}
-
-	/*Get random rank using rank ordinal*/
-	private Suit getRandomSuit() {
-		int randomInt = random.nextInt(4);	//Based on 4 available suits
-		return Suit.values()[randomInt];
-	}
-	
-	/* ================================================
-	 * Helper method to check if new card is already in 
-	 * the hand. 
-	 * ================================================
-	 */
-	private boolean isCardAlreadyInHand(Card card) {
-		boolean isEmpty = true;
-		
-		for(int i=0;i<hand.length;i++) {
-			if(hand[i]!=null) {
-				isEmpty = false;
-				break;
-			}
-		}
-		if(isEmpty)
-			return false;
-		
-		for(int i=0;i<hand.length;i++) {
-			if(hand[i]==card) {
-				return true;
-			}
-		}
-		return false;
-	}
 
 }

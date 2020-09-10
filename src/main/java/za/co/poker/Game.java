@@ -1,8 +1,10 @@
 package za.co.poker;
 
+import java.util.List;
+
+import za.co.poker.entity.Card;
 import za.co.poker.service.Impl.DeckServiceImpl;
 import za.co.poker.service.Impl.HandEvaluatorServiceImpl;
-import za.co.poker.utility.Card;
 
 public class Game {
 
@@ -13,7 +15,7 @@ public class Game {
 		DeckServiceImpl deckService = new DeckServiceImpl();
 		System.out.print("Your Hand : ");
 		
-		Card[] hand = deckService.drawHand();
+		List<Card> hand = deckService.drawHand();
 		System.out.println();
 		System.out.println(handEvaluatorSvc.evaluate(hand).getDescription());
 		

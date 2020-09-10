@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="za.co.poker.service.Impl.HandEvaluatorServiceImplTest" time="0.001" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="za.co.poker.service.Impl.HandEvaluatorServiceImplTest" time="0.003" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="gopherProxySet" value="false"/>
     <property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit"/>
@@ -16,7 +16,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="ZA"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk-11.0.7.jdk/Contents/Home/lib"/>
-    <property name="sun.java.command" value="/Users/calvin/eclipse-workspace/FiveCardDrawPoker/target/surefire/surefirebooter10641909419124088976.jar /Users/calvin/eclipse-workspace/FiveCardDrawPoker/target/surefire 2020-09-08T09-54-00_232-jvmRun1 surefire12253257355751940850tmp surefire_09290146467467462090tmp"/>
+    <property name="sun.java.command" value="/Users/calvin/eclipse-workspace/FiveCardDrawPoker/target/surefire/surefirebooter13026214612378164838.jar /Users/calvin/eclipse-workspace/FiveCardDrawPoker/target/surefire 2020-09-08T10-41-09_459-jvmRun1 surefire15385452730345550869tmp surefire_09996252742729677040tmp"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="jdk.debug" value="release"/>
     <property name="test" value="HandEvaluatorServiceImplTest,DeckServiceImplTest"/>
@@ -34,7 +34,7 @@
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.awt.graphicsenv" value="sun.awt.CGraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="/Users/calvin/eclipse-workspace/FiveCardDrawPoker/target/surefire/surefirebooter10641909419124088976.jar"/>
+    <property name="surefire.real.class.path" value="/Users/calvin/eclipse-workspace/FiveCardDrawPoker/target/surefire/surefirebooter13026214612378164838.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.runtime.version" value="11.0.7+8-LTS"/>
@@ -62,5 +62,5 @@
     <property name="java.class.version" value="55.0"/>
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
   </properties>
-  <testcase name="testEvaluateHand" classname="za.co.poker.service.Impl.HandEvaluatorServiceImplTest" time="0.001"/>
+  <testcase name="testEvaluateHand" classname="za.co.poker.service.Impl.HandEvaluatorServiceImplTest" time="0.002"/>
 </testsuite>
